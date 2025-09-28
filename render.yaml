@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: simrabbit-whatsapp
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    plan: free
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: AGENT_NOTE
+        sync: false
+
+  - type: web
+    name: simrabbit-ivr
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn ivr_app:app"
+    plan: free
+    envVars:
+      - key: AGENT_NUMBER
+        sync: false
